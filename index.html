@@ -87,79 +87,101 @@
     </section>
   </main>
 
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
   <script>
+    window.TrackJS && TrackJS.install({ 
+      token: "8c7a3a8a2b014650b2cd1e21f844a4f3"
+      // for more configuration options, see https://docs.trackjs.com
+    });
+  </script>
+
+  <script>
+    TrackJS.track('Testing TrackJS!');
     let form = document.querySelector('form');
     form.addEventListener('submit', e => {
       e.preventDefault();
       let output = document.querySelector('output');
       let firstNum = document.querySelector('#first-num').value;
+
+        //Step 3 and 4
+    class FirstNumError extends Error {
+      constructor(message) {
+        super(message); // (1)
+        this.name = "FirstNumError"; // (2)
+      }
+    }
+
+    function test() {
+      throw new FirstNumError("This is an invalid First Number");
+    }
+
+    try {
+      if(isNaN(firstNum) == true){
+        test();
+      }
+    } catch(err) {
+      console.error("FirstNumError");
+    } finally{
+      console.log(firstNum);
+    }
+
       let secondNum = document.querySelector('#second-num').value;
       let operator = document.querySelector('#operator').value;
       output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
-    });
+  });
 
     let errorBtns = Array.from(document.querySelectorAll('#error-btns > button'));
 
     // Start your code here
     // You may move this JS to another file if you wish'
-    let log = document.getElementByID('log');
-    log.addEventListener('click', (event) => {
+    //Step 2
+    errorBtns[0].addEventListener('click', (event) => {
       console.log('Console Log Demo');
     });
-    let error = document.getElementByID('error');
-    error.addEventListener('click', (event) => {
+    errorBtns[1].addEventListener('click', (event) => {
       console.error('Console Error Demo');
     });
-    let count = document.getElementByID('count');
-    count.addEventListener('click', (event) => {
+    errorBtns[2].addEventListener('click', (event) => {
       console.count('Console Count Demo');
     });
-    let warn = document.getElementByID('warn');
-    warn.addEventListener('click', (event) => {
+    errorBtns[3].addEventListener('click', (event) => {
       console.warn('Console Warn Demo');
     });
-    let assert = document.getElementByID('assert');
-    assert.addEventListener('click', (event) => {
-      console.assert('Console Assert Demo');
+    errorBtns[4].addEventListener('click', (event) => {
+      let x = 2;
+      let y = 2;
+      console.assert(x != y, {x, y, errormsg: 'they should not be equal'});
     });
-    let clear = document.getElementByID('clear');
-    clear.addEventListener('click', (event) => {
+    errorBtns[5].addEventListener('click', (event) => {
       console.clear('Console Clear Demo');
     });
-    let dir = document.getElementByID('dir');
-    dir.addEventListener('click', (event) => {
+    errorBtns[6].addEventListener('click', (event) => {
       console.dir('Console Dir Demo');
     });
-    let dirxml = document.getElementByID('dirxml');
-    dirxml.addEventListener('click', (event) => {
+    errorBtns[7].addEventListener('click', (event) => {
       console.dirxml('Console Dirxml Demo');
     });
-    let start = document.getElementByID('start');
-    start.addEventListener('click', (event) => {
+    errorBtns[8].addEventListener('click', (event) => {
       console.group('Console Group Start Demo');
     });
-    let end = document.getElementByID('end');
-    end.addEventListener('click', (event) => {
+    errorBtns[9].addEventListener('click', (event) => {
       console.groupEnd('Console Group End Demo');
     });
-    let table = document.getElementByID('table');
-    table.addEventListener('click', (event) => {
-      console.table('Console Table Demo');
+    errorBtns[10].addEventListener('click', (event) => {
+      console.table([{ name: 'John Smith', age: 11 },
+    { name: "Harsheta Cavale", age: 20 },
+    { name: "Jane Doe", age: 19 }]);
     });
-    let stimer = document.getElementByID('stimer');
-    stimer.addEventListener('click', (event) => {
+    errorBtns[11].addEventListener('click', (event) => {
       console.time('Console Time Demo');
     });
-    let etimer = document.getElementByID('etimer');
-    etimer.addEventListener('click', (event) => {
+    errorBtns[12].addEventListener('click', (event) => {
       console.timeEnd('Console Time End Demo');
     });
-    let trace = document.getElementByID('trace');
-    trace.addEventListener('click', (event) => {
+    errorBtns[13].addEventListener('click', (event) => {
       console.trace('Console Trace Demo');
     });
-    let glob = document.getElementByID('glob');
-    glob.addEventListener('click', (event) => {
+    errorBtns[14].addEventListener('click', (event) => {
       console.log('Console Global Demo');
     });
   </script>
